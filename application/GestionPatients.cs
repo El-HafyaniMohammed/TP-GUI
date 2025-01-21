@@ -4,7 +4,7 @@ using System.Collections.Generic;
 class GestionPatients
 {
     // Liste des patients et historiques
-    public List<Patient> Patients { get; set; } = new List<Patient>();
+    public List<Patient> Patient { get; set; } = new List<Patient>();
     public List<Historique> Historiques { get; set; } = new List<Historique>();
 
     // Ajouter un patient
@@ -13,7 +13,7 @@ class GestionPatients
         if (patient == null)
             throw new ArgumentNullException(nameof(patient), "Le patient ne peut pas être null.");
 
-        Patients.Add(patient);
+        Patient.Add(patient);
     }
 
     // Ajouter un historique
@@ -28,7 +28,7 @@ class GestionPatients
     // Récupérer un patient par son ID
     public Patient GetPatientById(int id)
     {
-        return Patients.Find(p => p.Id == id);
+        return Patient.Find(p => p.Id == id);
     }
 
     // Récupérer l'historique d'un patient par son ID
@@ -45,7 +45,7 @@ class GestionPatients
         Console.WriteLine("| ID  | Nom           | Prénom        | Date de Naissance | Adresse         |");
         Console.WriteLine("-----------------------------------------------------------------------------");
 
-        foreach (var patient in Patients)
+        foreach (var patient in Patient)
         {
             Console.WriteLine($"| {patient.Id,-4} | {patient.Nom,-13} | {patient.Prenom,-13} | {patient.DateNaissance.ToShortDateString(),-17} | {patient.Adresse,-15} |");
         }
