@@ -1,0 +1,15 @@
+C:\Users\dell\Source\Repos\TP-GUI\application\bin\Debug\net8.0\application.exe
+C:\Users\dell\Source\Repos\TP-GUI\application\bin\Debug\net8.0\application.deps.json
+C:\Users\dell\Source\Repos\TP-GUI\application\bin\Debug\net8.0\application.runtimeconfig.json
+C:\Users\dell\Source\Repos\TP-GUI\application\bin\Debug\net8.0\application.dll
+C:\Users\dell\Source\Repos\TP-GUI\application\bin\Debug\net8.0\application.pdb
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.AssemblyInfoInputs.cache
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.AssemblyInfo.cs
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.csproj.CoreCompileInputs.cache
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.sourcelink.json
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.dll
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\refint\application.dll
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.pdb
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\application.genruntimeconfig.cache
+C:\Users\dell\Source\Repos\TP-GUI\application\obj\Debug\net8.0\ref\application.dll
