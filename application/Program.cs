@@ -2,150 +2,209 @@
 
 class Program
 {
-    // Instance de la classe GestionPatients pour gérer les patients et leurs historiques
     static GestionPatients gestionPatients = new GestionPatients();
 
-    // Point d'entrée de l'application
     static void Main(string[] args)
     {
-        // Ajouter des patients par défaut au démarrage
         InitialiserDonneesParDefaut();
 
         while (true)
         {
-            AfficherMenu(); // Afficher le menu principal
-            string choix = Console.ReadLine(); // Lire le choix de l'utilisateur
+            AfficherMenuStylise();
+            string choix = Console.ReadLine();
 
             switch (choix)
             {
                 case "1":
-                    AjouterPatient(); // Ajouter un patient
+                    AjouterPatient();
                     break;
                 case "2":
-                    AfficherTableauBord(); // Afficher le tableau de bord (liste des patients)
+                    AfficherTableauBord();
                     break;
                 case "3":
-                    AfficherHistoriquePatient(); // Afficher l'historique d'un patient
+                    AfficherHistoriquePatient();
                     break;
                 case "4":
-                    return; // Quitter l'application
+                    QuitterApplication();
+                    break;
                 default:
-                    Console.WriteLine("Choix invalide, veuillez réessayer.");
+                    AfficherMessageErreur("Choix invalide, veuillez réessayer.");
                     break;
             }
         }
     }
 
-    // Méthode pour initialiser des patients par défaut
     static void InitialiserDonneesParDefaut()
     {
-        // Ajouter des patients par défaut
-        Patient patient1 = new Patient
+        try
         {
-            Id = 1,
-            Nom = "Dupont",
-            Prenom = "Jean",
-            DateNaissance = new DateTime(1985, 5, 15),
-            Adresse = "123 Rue de Paris",
-            Telephone = "0123456789"
-        };
+            Patient patient1 = new Patient(1, "Dupont", "Jean", new DateTime(1985, 5, 15), "123 Rue de Paris", "0123456789");
+            Patient patient2 = new Patient(2, "Martin", "Marie", new DateTime(1990, 8, 22), "456 Avenue des Champs", "0987654321");
+            Patient patient3 = new Patient(3, "Mohammed", "elhafyani", new DateTime(1490, 3, 02), "45 Avenue des Champs", "09874564321");
+            Patient patient4 = new Patient(4, "Salma", "salmi", new DateTime(1990, 8, 22), "456 Avenue des Champs", "0987654321");
 
-        Patient patient2 = new Patient
+            gestionPatients.AjouterPatient(patient1);
+            gestionPatients.AjouterPatient(patient2);
+            gestionPatients.AjouterPatient(patient3);
+            gestionPatients.AjouterPatient(patient4);
+
+            Historique historique1 = new Historique(1, new DateTime(2023, 10, 1), "Grippe", "Repos et paracétamol");
+            Historique historique2 = new Historique(1, new DateTime(2023, 10, 10), "Contrôle", "Aucun");
+            Historique historique3 = new Historique(2, new DateTime(2023, 9, 20), "Allergie", "Antihistaminiques");
+            Historique historique4 = new Historique(3, new DateTime(2023, 9, 20), "Maroc", "Antihistaminiques");
+            Historique historique5 = new Historique(4, new DateTime(2023, 9, 20), "etali", "Antihistaminiques");
+
+            gestionPatients.AjouterHistorique(historique1);
+            gestionPatients.AjouterHistorique(historique2);
+            gestionPatients.AjouterHistorique(historique3);
+            gestionPatients.AjouterHistorique(historique4);
+            gestionPatients.AjouterHistorique(historique5);
+
+            AfficherMessageSucces("Données par défaut initialisées avec succès !");
+        }
+        catch (Exception ex)
         {
-            Id = 2,
-            Nom = "Martin",
-            Prenom = "Marie",
-            DateNaissance = new DateTime(1990, 8, 22),
-            Adresse = "456 Avenue des Champs",
-            Telephone = "0987654321"
-        };
-
-        // Ajouter les patients à la liste
-        gestionPatients.AjouterPatient(patient1);
-        gestionPatients.AjouterPatient(patient2);
-
-        // Ajouter des historiques par défaut
-        Historique historique1 = new Historique
-        {
-            PatientId = 1,
-            DateVisite = new DateTime(2023, 10, 1),
-            Diagnostic = "Grippe",
-            Traitement = "Repos et paracétamol"
-        };
-
-        Historique historique2 = new Historique
-        {
-            PatientId = 1,
-            DateVisite = new DateTime(2023, 10, 10),
-            Diagnostic = "Contrôle",
-            Traitement = "Aucun"
-        };
-
-        Historique historique3 = new Historique
-        {
-            PatientId = 2,
-            DateVisite = new DateTime(2023, 9, 20),
-            Diagnostic = "Allergie",
-            Traitement = "Antihistaminiques"
-        };
-
-        // Ajouter les historiques à la liste
-        gestionPatients.AjouterHistorique(historique1);
-        gestionPatients.AjouterHistorique(historique2);
-        gestionPatients.AjouterHistorique(historique3);
-
-        Console.WriteLine("Données par défaut initialisées avec succès !");
+            AfficherMessageErreur($"Erreur lors de l'initialisation des données : {ex.Message}");
+        }
     }
 
-    // Méthode pour afficher le menu principal
-    static void AfficherMenu()
+    static void AfficherMenuStylise()
     {
-        Console.WriteLine("1. Ajouter un patient");
-        Console.WriteLine("2. Afficher le tableau de bord");
-        Console.WriteLine("3. Afficher l'historique d'un patient");
-        Console.WriteLine("4. Quitter");
-        Console.Write("Choix : ");
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("╔════════════════════════════════════════════════╗");
+        Console.WriteLine("║          GESTION DES PATIENTS                 ║");
+        Console.WriteLine("╠════════════════════════════════════════════════╣");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("║ 1. Ajouter un patient                         ║");
+        Console.WriteLine("║ 2. Afficher le tableau de bord                ║");
+        Console.WriteLine("║ 3. Afficher l'historique d'un patient         ║");
+        Console.WriteLine("║ 4. Quitter                                    ║");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("╚════════════════════════════════════════════════╝");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("\nVotre choix : ");
+        Console.ResetColor();
     }
 
-    // Méthode pour ajouter un patient
     static void AjouterPatient()
     {
-        Console.Write("Nom : ");
-        string nom = Console.ReadLine();
-        Console.Write("Prénom : ");
-        string prenom = Console.ReadLine();
-        Console.Write("Date de naissance (yyyy-mm-dd) : ");
-        DateTime dateNaissance = DateTime.Parse(Console.ReadLine());
-        Console.Write("Adresse : ");
-        string adresse = Console.ReadLine();
-        Console.Write("Téléphone : ");
-        string telephone = Console.ReadLine();
-
-        Patient patient = new Patient
+        try
         {
-            Id = gestionPatients.Patients.Count + 1, // Générer un ID unique
-            Nom = nom,
-            Prenom = prenom,
-            DateNaissance = dateNaissance,
-            Adresse = adresse,
-            Telephone = telephone
-        };
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("╔════════════════════════════════════════════════╗");
+            Console.WriteLine("║          AJOUTER UN PATIENT                   ║");
+            Console.WriteLine("╠════════════════════════════════════════════════╣");
+            Console.ResetColor();
 
-        gestionPatients.AjouterPatient(patient); // Ajouter le patient à la liste
-        Console.WriteLine("Patient ajouté avec succès !");
+            Console.Write("Nom : ");
+            string nom = Console.ReadLine();
+            Console.Write("Prénom : ");
+            string prenom = Console.ReadLine();
+            Console.Write("Date de naissance (yyyy-mm-dd) : ");
+            DateTime dateNaissance = DateTime.Parse(Console.ReadLine());
+            Console.Write("Adresse : ");
+            string adresse = Console.ReadLine();
+            Console.Write("Téléphone : ");
+            string telephone = Console.ReadLine();
+
+            Patient patient = new Patient(gestionPatients.Patients.Count + 1, nom, prenom, dateNaissance, adresse, telephone);
+            gestionPatients.AjouterPatient(patient);
+
+            AfficherMessageSucces("Patient ajouté avec succès !");
+            AttendreAppuiTouche();
+        }
+        catch (Exception ex)
+        {
+            AfficherMessageErreur($"Erreur : {ex.Message}");
+            AttendreAppuiTouche();
+        }
     }
 
-    // Méthode pour afficher le tableau de bord (liste des patients)
     static void AfficherTableauBord()
     {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("╔════════════════════════════════════════════════╗");
+        Console.WriteLine("║          TABLEAU DE BORD                      ║");
+        Console.WriteLine("╠════════════════════════════════════════════════╣");
+        Console.ResetColor();
+
         gestionPatients.AfficherPatients();
+
+        AttendreAppuiTouche();
     }
 
-    // Méthode pour afficher l'historique d'un patient
     static void AfficherHistoriquePatient()
     {
-        Console.Write("ID du patient : ");
-        int id = int.Parse(Console.ReadLine());
-        gestionPatients.AfficherHistorique(id);
+        try
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("╔════════════════════════════════════════════════╗");
+            Console.WriteLine("║          HISTORIQUE D'UN PATIENT              ║");
+            Console.WriteLine("╠════════════════════════════════════════════════╣");
+            Console.ResetColor();
+
+            Console.Write("ID du patient : ");
+            int id = int.Parse(Console.ReadLine());
+            gestionPatients.AfficherHistorique(id);
+
+            AttendreAppuiTouche();
+        }
+        catch (Exception ex)
+        {
+            AfficherMessageErreur($"Erreur : {ex.Message}");
+            AttendreAppuiTouche();
+        }
+    }
+
+    static void QuitterApplication()
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("╔════════════════════════════════════════════════╗");
+        Console.WriteLine("║          QUITTER L'APPLICATION                ║");
+        Console.WriteLine("╠════════════════════════════════════════════════╣");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("║ Merci d'avoir utilisé l'application !         ║");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("╚════════════════════════════════════════════════╝");
+        Console.ResetColor();
+
+        Environment.Exit(0);
+    }
+
+    static void AfficherMessageSucces(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"\n{message}");
+        Console.ResetColor();
+    }
+
+    static void AfficherMessageErreur(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"\nErreur : {message}");
+        Console.ResetColor();
+    }
+
+    static void AttendreAppuiTouche()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+        Console.ResetColor();
+        Console.ReadKey();
     }
 }

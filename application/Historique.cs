@@ -2,11 +2,20 @@
 
 class Historique
 {
-    // Propriétés (attributs)
-    public int PatientId { get; set; } // Identifiant du patient associé à cet historique
-    public DateTime DateVisite { get; set; } // Date de la visite
-    public string Diagnostic { get; set; } // Diagnostic établi lors de la visite
-    public string Traitement { get; set; } // Traitement prescrit
+    // Propriétés
+    public int PatientId { get; set; }
+    public DateTime DateVisite { get; set; }
+    public string Diagnostic { get; set; }
+    public string Traitement { get; set; }
+
+    // Constructeur
+    public Historique(int patientId, DateTime dateVisite, string diagnostic, string traitement)
+    {
+        PatientId = patientId;
+        DateVisite = dateVisite;
+        Diagnostic = !string.IsNullOrEmpty(diagnostic) ? diagnostic : throw new ArgumentException("Le diagnostic ne peut pas être vide.");
+        Traitement = !string.IsNullOrEmpty(traitement) ? traitement : throw new ArgumentException("Le traitement ne peut pas être vide.");
+    }
 
     // Méthode pour afficher les informations de l'historique
     public override string ToString()
